@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} on
+RewriteCond %{REQUEST_URI} !^(/checkout)
+RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

@@ -1,0 +1,46 @@
+﻿Initial commit
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   .gitattributes
+#	new file:   .gitignore
+#	new file:   CONTRIBUTING.md
+#	new file:   README.md
+#	new file:   app/Config/config.php
+#	new file:   app/Config/routes.php
+#	new file:   app/Controllers/Home.php
+#	new file:   app/Controllers/Product.php
+#	new file:   app/Templates/Layouts/Default.php
+#	new file:   app/Templates/Views/Home.php
+#	new file:   app/Templates/Views/Product.php
+#	new file:   composer.json
+#	new file:   public/.htaccess
+#	new file:   public/assets/css/bootstrap-theme.css
+#	new file:   public/assets/css/bootstrap-theme.min.css
+#	new file:   public/assets/css/bootstrap.css
+#	new file:   public/assets/css/bootstrap.min.css
+#	new file:   public/assets/fonts/glyphicons-halflings-regular.eot
+#	new file:   public/assets/fonts/glyphicons-halflings-regular.svg
+#	new file:   public/assets/fonts/glyphicons-halflings-regular.ttf
+#	new file:   public/assets/fonts/glyphicons-halflings-regular.woff
+#	new file:   public/assets/ico/apple-touch-icon-114x114.png
+#	new file:   public/assets/ico/apple-touch-icon-72x72.png
+#	new file:   public/assets/ico/apple-touch-icon.png
+#	new file:   public/assets/ico/favicon.ico
+#	new file:   public/assets/ico/winows-8-start-screen-icon.png
+#	new file:   public/assets/js/application.js
+#	new file:   public/assets/js/bootstrap.js
+#	new file:   public/assets/js/bootstrap.min.js
+#	new file:   public/assets/js/html5shiv.js
+#	new file:   public/assets/js/jquery.min.js
+#	new file:   public/assets/js/respond.min.js
+#	new file:   public/index.php
+#
+

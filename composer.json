@@ -1,0 +1,14 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "slimcontroller/slimcontroller": "dev-master",
+        "twig/twig": "1.14.*@dev",
+        "slim/views": "0.1.*",
+        "moltin/php-sdk": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "app/"
+        }
+    }
+}
