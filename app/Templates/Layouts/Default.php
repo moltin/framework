@@ -72,6 +72,8 @@
                 {% for item in cart.contents %}
                   <li><a href="#">{{ item.quantity }} x {{ item.name }} - &pound;{{ item.price }}</a></li>
                 {% endfor %}
+                  <li class="divider"></li>
+                  <li><a href="/cart">View Cart</a></li>
                 </ul>
               </li>
             </ul>

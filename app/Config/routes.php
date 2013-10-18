@@ -3,8 +3,14 @@
     return [
 
         '/'                                   => 'Home:index',
+
         '/category/:slug'                     => 'Category:index',
+
         '/product/:slug'                      => 'Product:index',
-        '/cart/insert(/:product)(/:quantity)' => 'Cart:insert'
+
+        '/cart'                               => 'Cart:index',
+        '/cart/insert(/:product)(/:quantity)' => 'Cart:insert',
+        '/cart/update(/:product)(/:quantity)' => 'Cart:update',
+        '/cart/delete/:item'                  => 'Cart:delete'
 
     ];
