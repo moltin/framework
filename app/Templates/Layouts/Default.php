@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ siteUrl('/assets/css/bootstrap.css', false) }}">
     <link rel="stylesheet" type="text/css" href="{{ siteUrl('/assets/css/bootstrap-theme.css', false) }}">
+    <link rel="stylesheet" type="text/css" href="{{ siteUrl('/assets/css/style.css', false) }}">
 
     <script type="text/javascript" src="{{ siteUrl('/assets/js/jquery.min.js', false) }}"></script>
     <script type="text/javascript" src="{{ siteUrl('/assets/js/bootstrap.min.js', false) }}"></script>
@@ -34,6 +35,10 @@
     <div class="container">
 
       <header class="row">
+        <h1 class="title">{{ config.app_name }}</h1>
+      </header>
+
+      <div class="row">
         <nav class="navbar navbar-default" role="navigation">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,15 +47,37 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{ config.app_name }}</a>
           </div>
           <div class="collapse navbar-collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home</a></li>
+            <ul class="nav navbar-nav navbar-left">
+            {% for category in categories %}
+            {% if category.children is empty %}
+              <li><a href="/category/{{ category.slug }}">{{ category.title }}</a></li>
+            {% else %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.title }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                {% for sub_category in category.children %}
+                  <li><a href="/category/{{ sub_category.slug }}">{{ sub_category.title }}</a></li>
+                {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="/cart" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-shopping-cart"></b> {{ cart.total_items }} Item{% if cart.total_items != 1 %}s{% endif %} (&pound;{{ cart.total|number_format(2, '.', ',') }}) <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                {% for item in cart.contents %}
+                  <li><a href="#">{{ item.quantity }} x {{ item.name }} - &pound;{{ item.price }}</a></li>
+                {% endfor %}
+                </ul>
+              </li>
             </ul>
           </div>
         </nav>
-      </header>
+      </div>
 
       <div class="row">
       {% block content %}{% endblock %}

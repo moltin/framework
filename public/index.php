@@ -1,5 +1,9 @@
 <?php
 
+    // Errors
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+
     // Load
     require '../vendor/autoload.php';
     
@@ -34,14 +38,8 @@
     // Add global values
     $app->view->getEnvironment()->addGlobal('config', $config);
 
-    // SDK
-    $app->moltin = new \Moltin\SDK\SDK(new \Moltin\SDK\Storage\Session(), new \Moltin\SDK\Request\CURL());
-
-    // SDK Authentication
-    $app->moltin->authenticate(new \Moltin\SDK\Authenticate\ClientCredentials(), [
-        'client_id'     => $config['api_client_id'],
-        'client_secret' => $config['api_client_secret']
-    ]);
+    // Add moltin middleware
+    $app->add(new \Middleware\Moltin($config));
 
     // Routes
     $app->addRoutes($routes);
