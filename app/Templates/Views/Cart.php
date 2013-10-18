@@ -26,7 +26,7 @@
   		<tbody>
   		{% for hash,item in cart.contents %}
   			<tr>
-  				<td>{{ item.name }}</td>
+  				<td><a href="/product/{{ item.slug }}">{{ item.name }}</a></td>
   				<td>
 	  				<div class="input-group">
 	      			<span class="input-group-btn"><a href="/cart/update/{{ hash }}/{{ item.quantity - 1 }}" class="btn btn-default" type="button">-</a></span>
