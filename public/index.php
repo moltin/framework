@@ -36,6 +36,7 @@
     $view->setTemplatesDirectory('../app/Templates/');
 
     // Add global values
+    $app->config = $config;
     $app->view->getEnvironment()->addGlobal('config', $config);
 
     // Add moltin middleware

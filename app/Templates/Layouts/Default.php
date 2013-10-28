@@ -35,7 +35,7 @@
     <div class="container">
 
       <header class="row">
-        <h1 class="title">{{ config.app_name }}</h1>
+        <h1 class="title"><a href="/">{{ config.app_name }}</a></h1>
       </header>
 
       <div class="row">
@@ -74,6 +74,7 @@
                 {% endfor %}
                   <li class="divider"></li>
                   <li><a href="/cart">View Cart</a></li>
+                  <li><a href="/checkout">Checkout</a></li>
                 </ul>
               </li>
             </ul>

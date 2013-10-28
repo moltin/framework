@@ -9,8 +9,8 @@
   			<tr>
   				<th>Product</th>
   				<th style="width: 140px">Quantity</th>
-  				<th>Price</th>
-  				<th>Total</th>
+  				<th style="width: 140px">Price</th>
+  				<th style="width: 140px">Total</th>
   			</tr>
   		</thead>
   		<tfoot>
@@ -40,6 +40,10 @@
   		{% endfor %}
   		</tbody>
   	</table>
+
+  	<div class="pull-right">
+  		<a href="/checkout" class="btn btn-default">Checkout</a>
+  	</div>
   {% endif %}
 
 {% endblock %}

@@ -5,7 +5,7 @@ namespace Middleware;
 class Moltin extends \Slim\Middleware
 {
 
-	protected $config;
+	public $config;
 
 	public function __construct($config)
 	{
