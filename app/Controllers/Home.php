@@ -7,7 +7,7 @@ class Home extends \SlimController\SlimController
 
     public function indexAction()
     {
-           $this->render('Views/Home', []);
+        $this->render('Views/Home', []);
     }
 
 }

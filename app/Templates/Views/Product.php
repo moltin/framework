@@ -37,9 +37,7 @@
 
       <h1 class="title"><span class="model">{{ title }}</span></h1>
       <h5>Our Price : <span class="price">&pound;{{ price }}</span></h5>
-      <!--<h6>RRP : <span class="rrp">£14.99</span></h6>-->
       <p class="prodid">Product Code : <span>{{ sku }}</span></p>
-      <!--<p>Brand : <a href="http://demo.getfiresale.org/brand/firesale/">FireSale</a></p>-->
       <p class="availability">Availability : <span>{{ stock_status.value }} ({{ stock_level }})</span></p>
 
       <hr />
@@ -47,7 +45,40 @@
       <form action="{{ siteUrl('/cart/insert', false) }}" method="post" role="form" class="form-inline">
         <input name="product" value="{{ id }}" type="hidden" />
         <div class="form-group">
-          <input type="text" name="quantity" value="1" size="3" class="form-control" />
+          <label for="quantity" class="control-label">Quantity*</label>
+          <div class="controls">
+            <input type="text" name="quantity" value="1" size="3" class="form-control" />
+          </div>
+
+    {% for modifier in modifiers %}
+      {% if modifier.type.value == "Variant" %}
+        <label for="modifier[{{ modifier.id }}]" class="control-label">{{ modifier.title }}*</label>
+        <div class="controls">
+          <select class="form-control" required="required" name="modifier[{{ modifier.id }}]">
+            <option value="">{{ modifier.instructions }}</option>
+            {% for variation in modifier.variations %}
+              <option value="{{ variation.id }}">{{ variation.title }} ({{ variation.difference }})</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% elseif modifier.type.value == "Single" %}
+        <label for="single[{{ modifier.id }}]" class="control-label">{{ modifier.title }}*</label>
+        <div class="controls">
+          <select class="form-control" name="single[{{ modifier.id }}]">
+            <option value="">{{ modifier.instructions }}</option>
+            {% for variation in modifier.variations %}
+              <option value="{{ variation.id }}">{{ variation.title }} ({{ variation.difference }})</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% elseif modifier.type.value == "Input" %}
+        <label for="input[{{ modifier.id }}]" class="control-label">{{ modifier.title }}</label>
+        <div class="controls">
+          <input class="form-control" type="text" name="input[{{ modifier.id }}]" />
+        </div>
+      {% endif %}
+    {% endfor %}
+
         </div>
         <button type="submit" class="btn btn-default">Add to Cart</button>
       </form>

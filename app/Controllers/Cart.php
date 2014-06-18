@@ -17,18 +17,15 @@ class Cart extends \SlimController\SlimController
         $product    = ( $product === null && isset($_POST['product']) ? ( 0 + $_POST['product'] ) : ( 0 + $product ) );
         $quantity   = ( $quantity === null && isset($_POST['quantity']) ? ( 0 + $_POST['quantity'] ) : ( 0 + $quantity ) );
         $identifier = $this->_identifier();
+        $modifier   = ( isset($_POST['modifier']) ? $_POST['modifier'] : array() );
 
         try {
 
-            // Get the product
-            $result = $this->app->moltin->get('product', ['id' => $product, 'status' => 1]);
-
             // Add to cart
             $result = $this->app->moltin->post('cart/'.$identifier, [
-                'id'       => $result['result']['id'],
+                'id'       => $product,
                 'quantity' => $quantity,
-                'name'     => $result['result']['title'],
-                'price'    => $result['result']['price']
+                'modifier' => $modifier
             ]);
 
         } catch(\Exception $e) {

@@ -34,58 +34,30 @@ class Moltin extends \Slim\Middleware
 	    ]);
 
     	try {
-
     		// Get categories
-    		$category = $this->app->moltin->get('categories');
-    		$category = $this->generate_tree($category);
+            $categories = $this->app->moltin->get('categories/tree');
+        } catch(\Exception $e) {
+            exit($e->getMessage());
+        }
 
+        try {
     		// Get cart
     		if ( isset($_COOKIE['identifier']) ) {
     			$cart = $this->app->moltin->get('cart/'.$_COOKIE['identifier']);
+                $cart = $cart['result'];
     		}
-
     	} catch(\Exception $e) {
     		exit($e->getMessage());
     	}
 
+        // add cart to app - so it can be accessed in controllers
+        $this->app->cart = $cart;
+
     	// Assign to view
     	$this->app->view()->appendData([
-    		'categories' => $category,
+    		'categories' => $categories['result'],
     		'cart'       => $cart
     	]);
-    }
-
-    protected function generate_tree($categories)
-    {
-
-        // Variables
-        $tmp  = array();
-        $tree = array();
-
-        // Skip empty
-        if ( empty($categories) ) { return; }
-
-        // Start building
-        foreach ($categories['result'] AS $category) {
-            $tmp[$category['id']] = $category;
-        }
-
-        unset($categories);
-
-        foreach ($tmp as $row) {
-
-            if ( array_key_exists($row['parent']['id'], $tmp) ) {
-                $tmp[$row['parent']['id']]['children'][] =& $tmp[$row['id']];
-            }
-
-            if ($row['parent']['id'] == 0 or $row['parent']['id'] === null ) {
-                $tree[] =& $tmp[$row['id']];
-            }
-
-        }
-
-        // Return
-        return $tree;
     }
 
 }
