@@ -7,30 +7,38 @@ class Checkout extends \SlimController\SlimController
 
     public function indexAction()
     {
+        if ($_POST) {
+            $order = \Cart::Order([
+              'gateway' => 'dummy',
+              'customer' => [
+                'first_name'  => 'Jon',
+                'last_name'   => 'Doe',
+                'email'       => 'jon.doe@gmail.com'
+              ],
+              'bill_to' => [
+                'first_name'  => 'Jon',
+                'last_name'   => 'Doe',
+                'address_1'   => '123 Sunny Street',
+                'address_2'   => 'Sunnycreek',
+                'city'        => 'Sunnyvale',
+                'county'      => 'California',
+                'country'     => 'US',
+                'postcode'    => 'CA94040',
+                'phone'       => '6507123124'
+              ],
+              'ship_to'  => 'bill_to',
+              'shipping' => 'free_shipping'
+            ]);
+        }
 
-        $identifier = $this->_identifier();
-
-        // from order 405
-
-        $fields = $this->app->moltin->fields('order');
-        $customer = $this->app->moltin->fields('customer');
-        $shipping = $this->app->moltin->get('shipping');
-        $address = $this->app->moltin->fields('customer/63/address');
-        $checkout = $this->app->moltin->get('cart/'.$identifier.'/checkout');
-        $cart = $this->app->cart;
-
-        unset($address['customer']);
-        unset($customer['group']);
+        $checkout = \Cart::Checkout();
+        $address  = \Address::Fields();
 
         // Cart already available globally, just build the page
         $this->render('Views/Checkout',[
             'title'     => 'Checkout',
-            'fields'    => $fields,
-            'address'   => $address,
-            'cart'      => $cart,
-            'shipping'  => $shipping['result'],
-            'customer'  => $customer,
-            'checkout'  => $checkout['result']
+            'checkout'  => $checkout['result'],
+            'address'   => $address
         ]);
     }
 

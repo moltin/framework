@@ -10,16 +10,21 @@ class Category extends \SlimController\SlimController
         try {
 
             // Get category
-            $category = $this->app->moltin->get('category', ['slug' => $slug, 'status' => 1])['result'][0];
+            $category = \Category::Find(['slug' => $slug, 'status' => 1]);
 
-            // Get products
-            $products = $this->app->moltin->get('products', [
-                'limit'    => $this->app->config['app_per_page'],
-                'offset'   => $offset
-            ]);
-
-            // Assign products
-            $category['products'] = $products['result'];
+            if ($category['result'][0]) {
+                // Get products
+                $products = \Product::Find([
+                    'limit'    => $this->app->config['app_per_page'],
+                    'offset'   => $offset,
+                    'category' => $category['result'][0]['id']
+                ]);
+    
+                // Assign products
+                $category['products'] = $products['result'];               
+            } else {
+                $this->app->redirect('404');
+            }
 
         } catch(\Exception $e) {
             exit($e->getMessage());

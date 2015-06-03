@@ -4,7 +4,7 @@
         "slimcontroller/slimcontroller": "dev-master",
         "twig/twig": "1.14.*@dev",
         "slim/views": "0.1.*",
-        "moltin/php-sdk": "dev-master"
+        "moltin/php-sdk": "dev-version1"
     },
     "autoload": {
         "psr-0": {

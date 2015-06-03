@@ -16,20 +16,14 @@ class Cart extends \SlimController\SlimController
         // Variables
         $product    = ( $product === null && isset($_POST['product']) ? ( 0 + $_POST['product'] ) : ( 0 + $product ) );
         $quantity   = ( $quantity === null && isset($_POST['quantity']) ? ( 0 + $_POST['quantity'] ) : ( 0 + $quantity ) );
-        $identifier = $this->_identifier();
         $modifier   = ( isset($_POST['modifier']) ? $_POST['modifier'] : array() );
 
         try {
-
             // Add to cart
-            $result = $this->app->moltin->post('cart/'.$identifier, [
-                'id'       => $product,
-                'quantity' => $quantity,
-                'modifier' => $modifier
-            ]);
-
+            $result = \Cart::Insert($product,$quantity,$modifier);
         } catch(\Exception $e) {
-            exit($e->getMessage());
+            $this->app->flash('error', $e->getMessage());
+            $this->app->redirect($_SERVER['HTTP_REFERER']);
         }
 
         // Flash and redirect
@@ -40,15 +34,14 @@ class Cart extends \SlimController\SlimController
 
     public function updateAction($product, $quantity)
     {
-        // Variables
-        $identifier = $this->_identifier();
-
-        try {
-
-            $result = $this->app->moltin->put('cart/'.$identifier.'/item/'.$product, ['quantity' => $quantity]);
-
-        } catch(\Exception $e) {
-            exit($e->getMessage());
+        if ($quantity == 0) {
+            $result = \Cart::Remove($product);
+        } else {
+            try {
+                $result = \Cart::Update($product, ['quantity' => $quantity]);
+            } catch(\Exception $e) {
+                exit($e->getMessage());
+            }
         }
 
         // Flash and redirect
@@ -60,14 +53,9 @@ class Cart extends \SlimController\SlimController
 
     public function deleteAction($item)
     {
-        // Variables
-        $identifier = $this->_identifier();
-
         try {
-
             // Remove the item
-            $result = $this->app->moltin->delete('cart/'.$identifier.'/item/'.$item);
-
+            $result = \Cart::Remove($item);
         } catch(\Exception $e) {
             exit($e->getMessage());
         }
@@ -76,15 +64,6 @@ class Cart extends \SlimController\SlimController
         if ( $result['status'] == 1 ) { $this->app->flash('success', 'Item removed from cart'); }
         else { $this->app->flash('error', 'Error removing item from cart'); }
         $this->app->redirect($_SERVER['HTTP_REFERER']);
-    }
-
-    protected function _identifier()
-    {
-        if ( isset($_COOKIE['identifier']) ) { return $_COOKIE['identifier']; }
-
-        $identifier = md5(uniqid());
-        setcookie('identifier', $identifier, strtotime("+30 day"), '/');
-        return $identifier;
     }
 
 }

@@ -15,7 +15,7 @@
 		  	{% if product.images is empty %}<b class="glyphicon glyphicon-camera"></b>{% else %}<img src="{{ product.images|first.url.http }}" alt="Image" />{% endif %}
 		  	<h4><a href="/product/{{ product.slug }}">{{ product.title }}</a></h4>
 		  	<div class="btn-group">
-		  		<span class="btn btn-default">&pound;{{ product.price }}</span>
+		  		<span class="btn btn-default">&pound;{{ product.price.value }}</span>
 		  		<a href="/product/{{ product.slug }}" class="btn btn-default">View</a>
 		  		<a href="/cart/insert/{{ product.id }}" class="btn btn-default">Add to Cart</a>
 		  	</div>

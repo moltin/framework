@@ -14,6 +14,8 @@
         '/cart/delete/:item'                  => 'Cart:delete',
 
         '/checkout'			                  => 'Checkout:index',
-        '/checkout/complete'			      => 'Checkout:complete'
+        '/checkout/complete'			      => 'Checkout:complete',
+
+        '/:page'                              => 'Home:page',
 
     ];
