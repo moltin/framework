@@ -1,3 +1,5 @@
+**This repository will be deprecated feel free to fork, but don't rely on it as is**
+
 # Framework
 
 Lightweight store framework built using Slim, Twig, Bootstrap and the Moltin SDK.
