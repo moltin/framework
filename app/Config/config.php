@@ -17,8 +17,8 @@
         'api_client_id'     => 'umRG34nxZVGIuCSPfYf8biBSvtABgTR8GMUtflyE',
         'api_client_secret' => 'W0EMkTVKgfWOn88Z17ZAHVPaS9UVUEGVPou78GiI',
 
-        'moltin_api_url'        => ( $environment == 'development' ? 'http://api.dev.molt.in/' : 'https://api.molt.in/' ),
-        'moltin_api_auth_url'   => ( $environment == 'development' ? 'http://api.dev.molt.in/' : 'https://auth.molt.in/' ),
-        'moltin_api_version'    => ( $environment == 'development' ? 'v1' : 'v1' ),
+        'moltin_api_url'        => 'https://api.molt.in/',
+        'moltin_api_auth_url'   => 'https://api.molt.in/',
+        'moltin_api_version'    => 'v1',
 
     ];
