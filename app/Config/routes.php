@@ -6,6 +6,8 @@
 
         '/category/:slug'                     => 'Category:index',
 
+        '/collection/:slug'                   => 'Collection:index',
+
         '/product/:slug'                      => 'Product:index',
 
         '/cart'                               => 'Cart:index',
